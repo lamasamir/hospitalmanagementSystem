@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Inventory{% endblock %}
+
+{% block content %}
+  <h2>Inventory Items</h2>
+  <a href="{% url 'inventory_create' %}">+ Add New Item</a>
+  <ul>
+    {% for item in items %}
+      <li>{{ item.name }} – {{ item.quantity }} {{ item.unit }} ({{ item.category }})</li>
+    {% empty %}
+      <li>No inventory items found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

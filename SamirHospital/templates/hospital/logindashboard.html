@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | Hospital{% endblock %}
+
+{% block content %}
+
+<h2>Welcome to Samir Memorial Hospital</h2>
+
+<p>
+  <strong>Location:</strong> New Baneshwor, Kathmandu, Nepal<br>
+  <strong>Contact:</strong> +977-1-4478901, Email: info@samirmemorial.org
+</p>
+
+<h3>🏆 Our Mission & Goals</h3>
+<ul>
+  <li>To provide high-quality, affordable healthcare to all communities.</li>
+  <li>To ensure timely and compassionate service to every patient.</li>
+  <li>To continuously improve through technology and medical research.</li>
+  <li>To promote preventive healthcare and awareness across Nepal.</li>
+</ul>
+
+<h3>💼 Hospital Policy</h3>
+<ul>
+  <li>All patient data is confidential and handled with care and security.</li>
+  <li>Doctors and staff adhere to national and international healthcare standards.</li>
+  <li>Billing is transparent and all charges are explained to patients clearly.</li>
+  <li>Feedback and complaints are welcomed and handled professionally.</li>
+</ul>
+
+<h3>🩺 Our Services</h3>
+<ul>
+  <li>24/7 Emergency and Trauma Services</li>
+  <li>Outpatient Department (OPD)</li>
+  <li>Inpatient Admission & Care</li>
+  <li>Laboratory Testing & Diagnostics</li>
+  <li>Pharmacy & Medicine Dispensing</li>
+  <li>Surgical & ICU Services</li>
+  <li>Specialist Consultation (Cardiology, Pediatrics, Orthopedics, etc.)</li>
+</ul>
+
+
+{% if not user.is_authenticated %}
+  <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to get started.</p>
+{% endif %}
+{% endblock %}

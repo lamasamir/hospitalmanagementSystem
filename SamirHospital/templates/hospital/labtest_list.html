@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Lab Tests{% endblock %}
+
+{% block content %}
+  <h2>Lab Tests</h2>
+  <a href="{% url 'labtest_create' %}">+ Add New Lab Test</a>
+  <ul>
+    {% for test in labtests %}
+      <li>{{ test.test_name }} for {{ test.patient.user.get_full_name }} – {{ test.status }}</li>
+    {% empty %}
+      <li>No lab tests recorded.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

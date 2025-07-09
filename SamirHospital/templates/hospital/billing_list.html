@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Billing Records{% endblock %}
+
+{% block content %}
+  <h2>Billing</h2>
+  <a href="{% url 'billing_create' %}">+ Create New Bill</a>
+  <ul>
+    {% for bill in billings %}
+      <li>Bill #{{ bill.id }} – {{ bill.patient.user.get_full_name }} – Rs. {{ bill.total }} – {{ bill.payment_status }}</li>
+    {% empty %}
+      <li>No billing records available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

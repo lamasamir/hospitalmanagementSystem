@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Medicines{% endblock %}
+
+{% block content %}
+  <h2>Medicine Inventory</h2>
+  <a href="{% url 'medicine_create' %}">+ Add New Medicine</a>
+  <ul>
+    {% for medicine in medicines %}
+      <li>{{ medicine.name }} – {{ medicine.stock }} in stock – Exp: {{ medicine.expiry_date }}</li>
+    {% empty %}
+      <li>No medicines available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <h2>Welcome, {{ user.get_full_name }}</h2>
+  <p>You are logged in as <strong>{{ user.role|title }}</strong>.</p>
+
+  {% if user.role == 'admin' %}
+    <ul>
+      <li><a href="{% url 'department_list' %}">Manage Departments</a></li>
+      <li><a href="{% url 'doctor_list' %}">View Doctors</a></li>
+      <li><a href="{% url 'patient_list' %}">View Patients</a></li>
+      <li><a href="{% url 'appointment_list' %}">Appointments</a></li>
+      <li><a href="{% url 'labtest_list' %}">Lab Tests</a></li>
+      <li><a href="{% url 'medicine_list' %}">Medicines</a></li>
+      <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
+      <li><a href="{% url 'security_list' %}">Security Staff</a></li>
+      <li><a href="{% url 'entrylog_list' %}">Entry Logs</a></li>
+      <li><a href="{% url 'billing_list' %}">Billing</a></li>
+    </ul>
+  
+  {% elif user.role == 'doctor' %}
+    <ul>
+      <li><a href="{% url 'appointment_list' %}">My Appointments</a></li>
+      <li><a href="{% url 'labtest_list' %}">View Lab Tests</a></li>
+      <!-- Add doctor-specific links if needed -->
+    </ul>
+
+  {% elif user.role == 'patient' %}
+    <ul>
+      <li><a href="{% url 'appointment_list' %}">My Appointments</a></li>
+      <li><a href="{% url 'labtest_list' %}">My Lab Tests</a></li>
+      <li><a href="{% url 'medicine_list' %}">Prescribed Medicines</a></li>
+      <li><a href="{% url 'billing_list' %}">My Bills</a></li>
+    </ul>
+
+  {% elif user.role == 'nurse' %}
+    <ul>
+      <li><a href="{% url 'appointment_list' %}">Assist with Appointments</a></li>
+      <li><a href="{% url 'labtest_list' %}">Lab Support</a></li>
+    </ul>
+  {% endif %}
+{% endblock %}
+

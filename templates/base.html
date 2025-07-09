@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Hospital Management System{% endblock %}</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        nav {
+            background-color: #004080;
+            padding: 10px 20px;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0; padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        nav li {
+            margin-right: 15px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+            max-width: 1100px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 6px;
+        }
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #004080;
+            color: white;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+
+        {% if user.is_authenticated %}
+            {% if user.role == 'admin' %}
+                <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                <li><a href="{% url 'create_admin' %}">Create Admin</a></li>
+                <li><a href="{% url 'department_list' %}">Departments</a></li>
+                <li><a href="{% url 'doctor_list' %}">Doctors</a></li>
+                <li><a href="{% url 'patient_list' %}">Patients</a></li>
+                <li><a href="{% url 'appointment_list' %}">Appointments</a></li>
+                <li><a href="{% url 'labtest_list' %}">Lab Tests</a></li>
+                <li><a href="{% url 'medicine_list' %}">Medicines</a></li>
+                <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
+                <li><a href="{% url 'security_list' %}">Security Staff</a></li>
+                <li><a href="{% url 'entrylog_list' %}">Entry Logs</a></li>
+                <li><a href="{% url 'billing_list' %}">Billing</a></li>
+
+            {% elif user.role == 'doctor' %}
+                <li><a href="{% url 'appointment_list' %}">My Appointments</a></li>
+                <li><a href="{% url 'labtest_list' %}">Lab Tests</a></li>
+
+            {% elif user.role == 'patient' %}
+                <li><a href="{% url 'appointment_list' %}">My Appointments</a></li>
+                <li><a href="{% url 'billing_list' %}">My Bills</a></li>
+
+            {% endif %}
+
+            <li><a href="{% url 'logout' %}">Logout ({{ user.username }})</a></li>
+
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<main>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% block content %}
+    <!-- Page content will be inserted here -->
+    {% endblock %}
+</main>
+
+<footer>
+    &copy; {{ now.year }} Hospital Management System
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Entry Logs{% endblock %}
+
+{% block content %}
+  <h2>Entry Logs</h2>
+  <a href="{% url 'entrylog_create' %}">+ Add Entry Log</a>
+  <ul>
+    {% for log in logs %}
+      <li>{{ log.person_name }} – {{ log.purpose }} – In: {{ log.time_in }} {% if log.time_out %}– Out: {{ log.time_out }}{% endif %}</li>
+    {% empty %}
+      <li>No entry logs yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

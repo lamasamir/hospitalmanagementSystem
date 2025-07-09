@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Appointments{% endblock %}
+{% block content %}
+<h1>Appointments</h1>
+<a href="{% url 'appointment_create' %}">+ Book Appointment</a>
+<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <thead style="background-color: #004080; color: white;">
+    <tr>
+      <th>Patient</th>
+      <th>Doctor</th>
+      <th>Date</th>
+      <th>Time Slot</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for appointment in appointments %}
+      <tr>
+        <td>{{ appointment.patient.user.get_full_name }}</td>
+        <td>Dr. {{ appointment.doctor.user.get_full_name }}</td>
+        <td>{{ appointment.appointment_date }}</td>
+        <td>{{ appointment.time_slot }}</td>
+        <td>{{ appointment.status }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5" style="text-align:center;">No appointments found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

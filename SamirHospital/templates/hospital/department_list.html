@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Departments - Hospital Management{% endblock %}
+
+{% block content %}
+<h1>Departments</h1>
+
+<a href="{% url 'department_create' %}" style="margin-bottom: 15px; display: inline-block;">+ Add New Department</a>
+
+<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead style="background-color: #004080; color: white;">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department in departments %}
+            <tr>
+                <td>{{ department.name }}</td>
+                <td>{{ department.description|linebreaksbr }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2" style="text-align: center;">No departments found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

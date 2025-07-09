@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Security Staff{% endblock %}
+
+{% block content %}
+  <h2>Security Staff</h2>
+  <a href="{% url 'security_create' %}">+ Add Security Staff</a>
+  <ul>
+    {% for person in staff %}
+      <li>{{ person.user.get_full_name }} – Gate: {{ person.assigned_gate }} – Shift: {{ person.shift_start }} to {{ person.shift_end }}</li>
+    {% empty %}
+      <li>No security personnel added yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
